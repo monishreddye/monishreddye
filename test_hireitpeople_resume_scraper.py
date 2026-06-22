@@ -56,9 +56,11 @@ class HireItPeopleResumeScraperTest(unittest.TestCase):
     def test_parse_resume_restructures_resume_body(self) -> None:
         resume = parse_resume(SAMPLE_HTML, "https://example.test/resume")
 
-        self.assertEqual(resume["title"], "Senior Java Developer Resume")
+        self.assertNotIn("title", resume)
+        self.assertNotIn("rating", resume)
+        self.assertNotIn("source_url", resume)
+        self.assertNotIn("raw_text", resume)
         self.assertEqual(resume["location"], "New York, NY")
-        self.assertEqual(resume["rating"], {"score": 4.2, "scale": 5.0})
         self.assertEqual(resume["objective"], "Senior Java/J2EE Application developer.")
         self.assertEqual(
             resume["summary"],
@@ -85,12 +87,29 @@ class HireItPeopleResumeScraperTest(unittest.TestCase):
         second_job = resume["work_experience"][1]
         self.assertEqual(second_job["company"], "Confidential")
         self.assertEqual(second_job["responsibilities"], ["Designed, developed and unit tested screens."])
+        self.assertNotIn("notes", second_job)
+
+    def test_parse_resume_can_include_metadata_when_requested(self) -> None:
+        resume = parse_resume(
+            SAMPLE_HTML,
+            "https://example.test/resume",
+            include_metadata=True,
+            include_raw=True,
+        )
+
+        self.assertEqual(resume["location"], "New York, NY")
+        self.assertEqual(resume["metadata"]["title"], "Senior Java Developer Resume")
+        self.assertEqual(resume["metadata"]["rating"], {"score": 4.2, "scale": 5.0})
+        self.assertEqual(resume["metadata"]["source_url"], "https://example.test/resume")
+        self.assertIn("Objective:", resume["raw_text"])
 
     def test_markdown_output_contains_restructured_sections(self) -> None:
         resume = parse_resume(SAMPLE_HTML, "https://example.test/resume")
         markdown = resume_to_markdown(resume)
 
-        self.assertIn("# Senior Java Developer Resume", markdown)
+        self.assertNotIn("Senior Java Developer Resume", markdown)
+        self.assertNotIn("4.2/5", markdown)
+        self.assertIn("**Location:** New York, NY", markdown)
         self.assertIn("## Skills", markdown)
         self.assertIn("### Senior Java Developer", markdown)
         self.assertIn("- Gathered new requirements.", markdown)

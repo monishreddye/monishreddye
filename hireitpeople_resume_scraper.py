@@ -149,7 +149,7 @@ def fetch_html(url: str, timeout: int = 30) -> str:
         raise RuntimeError(f"Could not download {url!r}: {exc}") from exc
 
 
-def extract_metadata(html: str, source_url: str) -> dict[str, Any]:
+def extract_metadata(html: str, source_url: str | None) -> dict[str, Any]:
     title = first_tag_text(html, "h3") or title_from_head(html)
     page_title = title_from_head(html)
     location = first_matching_tag_text(html, "h4", class_fragment="text-greish")
@@ -204,13 +204,21 @@ def extract_body_blocks(html: str) -> list[TextBlock]:
     return parser.blocks
 
 
-def parse_resume(html: str, source_url: str) -> dict[str, Any]:
+def parse_resume(
+    html: str,
+    source_url: str | None = None,
+    *,
+    include_metadata: bool = False,
+    include_raw: bool = False,
+) -> dict[str, Any]:
     blocks = extract_body_blocks(html)
     metadata = extract_metadata(html, source_url)
-    structured = structure_blocks(blocks)
-    structured.update(metadata)
-    structured["raw_text"] = blocks_to_text(blocks)
-    return structured
+    resume = {"location": metadata.get("location"), **structure_blocks(blocks)}
+    if include_metadata:
+        resume["metadata"] = {key: value for key, value in metadata.items() if key != "location"}
+    if include_raw:
+        resume["raw_text"] = blocks_to_text(blocks)
+    return prune_empty(resume)
 
 
 def structure_blocks(blocks: list[TextBlock]) -> dict[str, Any]:
@@ -360,13 +368,23 @@ def blocks_to_text(blocks: Iterable[TextBlock]) -> str:
     return "\n".join(lines)
 
 
+def prune_empty(value: Any) -> Any:
+    if isinstance(value, dict):
+        pruned = {}
+        for key, nested_value in value.items():
+            nested_value = prune_empty(nested_value)
+            if nested_value not in (None, "", [], {}):
+                pruned[key] = nested_value
+        return pruned
+    if isinstance(value, list):
+        return [nested_value for item in value if (nested_value := prune_empty(item)) not in (None, "", [], {})]
+    return value
+
+
 def resume_to_markdown(resume: dict[str, Any]) -> str:
-    lines = [f"# {resume.get('title') or 'Resume'}", ""]
+    lines: list[str] = []
     if resume.get("location"):
         lines.extend([f"**Location:** {resume['location']}", ""])
-    if resume.get("rating"):
-        rating = resume["rating"]
-        lines.extend([f"**Rating:** {rating['score']}/{rating['scale']}", ""])
 
     add_text_section(lines, "Objective", resume.get("objective"))
     add_text_section(lines, "Summary", resume.get("summary"))
@@ -420,8 +438,6 @@ def write_csv(resume: dict[str, Any], output_path: Path) -> None:
     """Write work experience rows to CSV for spreadsheet use."""
 
     fieldnames = [
-        "source_url",
-        "resume_title",
         "location",
         "company",
         "job_title",
@@ -435,8 +451,6 @@ def write_csv(resume: dict[str, Any], output_path: Path) -> None:
         for experience in resume.get("work_experience", []):
             writer.writerow(
                 {
-                    "source_url": resume.get("source_url"),
-                    "resume_title": resume.get("title"),
                     "location": resume.get("location"),
                     "company": experience.get("company"),
                     "job_title": experience.get("title"),
@@ -461,6 +475,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("-o", "--output", help="Write output to this file instead of stdout.")
     parser.add_argument("--timeout", type=int, default=30, help="HTTP timeout in seconds.")
+    parser.add_argument(
+        "--include-metadata",
+        action="store_true",
+        help="Include page/source metadata under a separate metadata key. Off by default.",
+    )
+    parser.add_argument(
+        "--include-raw",
+        action="store_true",
+        help="Include plain text extracted from the selected resume area. Off by default.",
+    )
     return parser
 
 
@@ -469,7 +493,12 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         html = fetch_html(args.url, timeout=args.timeout)
-        resume = parse_resume(html, args.url)
+        resume = parse_resume(
+            html,
+            args.url,
+            include_metadata=args.include_metadata,
+            include_raw=args.include_raw,
+        )
     except Exception as exc:  # pragma: no cover - exercised by users at runtime
         print(f"error: {exc}", file=sys.stderr)
         return 1
@@ -485,8 +514,6 @@ def main(argv: list[str] | None = None) -> int:
             writer = csv.writer(sys.stdout)
             writer.writerow(
                 [
-                    "source_url",
-                    "resume_title",
                     "location",
                     "company",
                     "job_title",
@@ -498,8 +525,6 @@ def main(argv: list[str] | None = None) -> int:
             for experience in resume.get("work_experience", []):
                 writer.writerow(
                     [
-                        resume.get("source_url"),
-                        resume.get("title"),
                         resume.get("location"),
                         experience.get("company"),
                         experience.get("title"),
