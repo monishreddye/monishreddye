@@ -265,7 +265,7 @@ def find_heading_index(blocks: list[TextBlock], heading: str) -> int | None:
 
 def normalized_heading(text: str) -> str:
     text = clean_text(text)
-    text = re.sub(r":+$", "", text)
+    text = re.sub(r"\s*:+\s*$", "", text)
     return text.lower()
 
 
