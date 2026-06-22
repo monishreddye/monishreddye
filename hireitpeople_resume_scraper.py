@@ -101,7 +101,7 @@ class ResumeBodyParser(HTMLParser):
                 self._in_body = False
 
     def handle_data(self, data: str) -> None:
-        if self._in_body:
+        if self._in_body and self._current_kind is not None:
             self._current_parts.append(data)
 
     def close(self) -> None:
