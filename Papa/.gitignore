@@ -1,0 +1,17 @@
+# Secrets and local data — never commit
+config.py
+.env
+data/
+*.wav
+*.mp3
+*.mp4
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
