@@ -1,0 +1,14 @@
+# Downloaded media
+downloads/
+test_downloads/
+*.mp4
+*.mkv
+*.webm
+*.m4a
+*.part
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
