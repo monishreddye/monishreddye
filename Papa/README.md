@@ -4,6 +4,8 @@ A private memorial voice companion for family — built from Papa's interview re
 
 Talk to him. Hear his voice. Feel him close again.
 
+**Repository:** https://github.com/monishreddye/papa (private)
+
 ## What Papa does
 
 - Extracts audio from his interview videos
@@ -13,25 +15,12 @@ Talk to him. Hear his voice. Feel him close again.
 
 ## Setup (Windows)
 
-### 1. Get the code
-
-**Option A — Create your private repo (recommended)**
-
-1. On GitHub: **New repository** → name it `Papa` → set **Private** → Create
-2. On your PC, open the `Papa` folder and run:
+### 1. Clone the repo
 
 ```bash
-git init
-git remote add origin https://github.com/YOUR_USERNAME/Papa.git
-git add .
-git commit -m "Papa memorial voice companion"
-git branch -M main
-git push -u origin main
+git clone https://github.com/monishreddye/papa.git
+cd papa
 ```
-
-**Option B — Copy from the project branch**
-
-The app lives in the `Papa/` folder on branch `cursor/papa-app-5248`.
 
 ### 2. Install Python 3.10+ and ffmpeg
 
@@ -101,14 +90,14 @@ Family on the same Wi‑Fi can open `http://YOUR-PC-IP:7860`.
 ## Project structure
 
 ```
-Papa/
-  app.py                  # Main family app
-  extract_audio.py        # Step 1: audio from videos
+papa/
+  app.py                   # Main family app
+  extract_audio.py         # Step 1: audio from videos
   transcribe_interviews.py # Step 2: build memory
-  youtube_downloader.py   # Helper: download interviews
-  config.example.py       # Settings template
-  assets/papa.jpg         # Optional photo
-  data/                   # Generated (not in git)
+  youtube_downloader.py    # Helper: download interviews
+  config.example.py        # Settings template
+  assets/papa.jpg          # Optional photo
+  data/                    # Generated (not in git)
 ```
 
 ## Built with love
