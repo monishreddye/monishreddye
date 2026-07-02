@@ -13,12 +13,25 @@ Talk to him. Hear his voice. Feel him close again.
 
 ## Setup (Windows)
 
-### 1. Clone this private repo
+### 1. Get the code
+
+**Option A — Create your private repo (recommended)**
+
+1. On GitHub: **New repository** → name it `Papa` → set **Private** → Create
+2. On your PC, open the `Papa` folder and run:
 
 ```bash
-git clone https://github.com/monishreddye/Papa.git
-cd Papa
+git init
+git remote add origin https://github.com/YOUR_USERNAME/Papa.git
+git add .
+git commit -m "Papa memorial voice companion"
+git branch -M main
+git push -u origin main
 ```
+
+**Option B — Copy from the project branch**
+
+The app lives in the `Papa/` folder on branch `cursor/papa-app-5248`.
 
 ### 2. Install Python 3.10+ and ffmpeg
 
