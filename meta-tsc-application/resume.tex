@@ -1,0 +1,164 @@
+%-------------------------
+% Resume in LaTeX — Monish Reddy Edulakanti
+% Tailored for: Meta — Technical Solutions Consultant (New York, NY)
+%-------------------------
+
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.6in}
+\addtolength{\textwidth}{1.2in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-7pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generated pdf is machine readable/ATS parsable
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Monish Reddy Edulakanti} \\ \vspace{2pt}
+    \small Technical Solutions Consultant \,$|$\, APIs \& Integrations \,$|$\, AI-Accelerated Troubleshooting \,$|$\, Client Delivery \\ \vspace{2pt}
+    \small New York, NY \,$|$\, +1 (812) 262-4911 \,$|$\,
+    \href{mailto:emonishreddy@rediffmail.com}{emonishreddy@rediffmail.com} \,$|$\,
+    \href{https://linkedin.com/in/monish-reddy-edulakanti}{linkedin.com/in/monish-reddy-edulakanti} \,$|$\,
+    \href{https://github.com/monishreddye}{github.com/monishreddye}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Technical solutions professional with 6 years of experience as the primary technical contact for enterprise clients (FedEx, USAA), diagnosing complex API, integration, and production issues and translating findings into clear recommendations for technical and non-technical stakeholders. Strong record of root-cause analysis across data flows and architectures, AI-integrated workflows, self-serve troubleshooting documentation, and cross-functional delivery --- with measurable outcomes: 40\% faster resolution, 15+ hours/week saved, 99.9\% availability.}
+
+%-----------SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Consulting \& Client Delivery}{: Partner/client advisory, technical discovery, escalation management, root-cause analysis, solution recommendations, release coordination, post-launch support, executive stakeholder communication} \\ \vspace{1pt}
+     \textbf{APIs \& Integrations}{: REST APIs, API documentation review, request/response debugging, authentication (LDAP/SSO), integration troubleshooting, FastAPI, XML, webhooks, data-flow analysis} \\ \vspace{1pt}
+     \textbf{AI \& Automation}{: AI-integrated workflows, prompt/context engineering, AI agent orchestration, AI-assisted root-cause analysis and documentation, process automation, quality/accuracy reviews} \\ \vspace{1pt}
+     \textbf{Programming \& Data}{: Python, PowerShell, SQL, C\#/.NET, JavaScript, React, SQL Server, Power BI, Excel, operational metrics and incident-trend analysis} \\ \vspace{1pt}
+     \textbf{Cloud \& Platforms}{: Azure, Google Cloud, Firebase, Windows Server, IIS, DNS, TCP/IP, load balancing, ServiceNow, Jira, Confluence, Git, RSA Archer IRM, ITIL 4, Agile}
+    }}
+ \end{itemize}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Indiana State University}{Mar 2024 -- Dec 2025}
+      {Graduate Assistant --- Technical Solutions \& Application Support}{Terre Haute, IN}
+      \resumeItemListStart
+        \resumeItem{Served as technical point of contact for faculty and administrative stakeholders: gathered requirements, recommended Firebase and Google Cloud solutions, secured deployment approvals, and supported web application delivery end to end.}
+        \resumeItem{Integrated AI models into university workflows to accelerate analysis and content development --- with quality and accuracy reviews before rollout --- measurably reducing manual effort and human error; maintained applications post-launch, resolved access and configuration issues, and authored self-serve troubleshooting documentation.}
+      \resumeItemListEnd
+
+    \vspace{4pt}
+    \resumeSubheading
+      {HCLTech --- FedEx and USAA accounts}{Sep 2019 -- Dec 2023}
+      {Senior Analyst (promoted from Analyst and Graduate Engineer Trainee)}{Chennai \& Noida, India}
+      \resumeItemListStart
+        \resumeItem{Served as the primary technical point of contact for FedEx users, application owners, and engineering teams --- diagnosing and resolving issues across applications, APIs, and infrastructure to unblock client operations, from intake through post-launch support.}
+        \resumeItem{Troubleshot complex API and integration failures by reviewing API documentation, requests/responses, logs, SQL records, authentication, and downstream dependencies; identified root causes across client data flows and architectures and guided implementation of fixes.}
+        \resumeItem{Collaborated cross-functionally with application, database, infrastructure, and network teams to coordinate releases, launch changes into production, and support existing systems, sustaining 99.9\% availability for business-critical services.}
+        \resumeItem{Identified recurring patterns across incidents and built scalable fixes and automation in Python, PowerShell, SQL, and REST APIs for system checks, validation, and reporting --- reducing manual effort 70\% and saving 15+ hours per week across the support funnel.}
+        \resumeItem{Authored implementation playbooks and troubleshooting guides with validation and recovery steps, published to the internal knowledge base --- enabling client self-service, cutting resolution time by 40\%, and mentoring peers on complex troubleshooting scenarios.}
+        \resumeItem{Used operational metrics, incident trends, and validation results to evaluate solution effectiveness and communicated outcomes and recommendations to business and engineering stakeholders at all organizational levels.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{Monish Labs} $|$ \emph{Financial Data \& Analytics Platform --- Python, FastAPI, REST APIs, SQL Server, React}}{2025 -- Present}
+          \resumeItemListStart
+            \resumeItem{Built an end-to-end market data and analytics platform spanning ingestion, validation, monitoring, and reporting, with automated checks for data-quality and integration failures across API, database, and client layers.}
+            \resumeItem{Orchestrated AI agents within development and operational workflows --- delegating repetitive analysis, monitoring, and documentation tasks to autonomous processes --- applying prompt/context engineering to improve output quality.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indiana State University}{Terre Haute, IN}
+      {Master of Science in Computer Science}{Jan 2024 -- Dec 2025}
+    \resumeSubheading
+      {Jayamukhi Institute of Technological Sciences}{Warangal, India}
+      {Bachelor of Technology in Computer Science and Engineering}{Aug 2015 -- May 2019}
+  \resumeSubHeadingListEnd
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications \& Recognition}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{ITIL v4 Foundation (2020) \,$|$\, HCL Distinguished Performance Award (2022) \,$|$\, ServiceNow Administration Fundamentals (in progress)}}
+ \end{itemize}
+
+\end{document}
